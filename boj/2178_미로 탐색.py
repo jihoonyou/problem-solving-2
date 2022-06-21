@@ -3,6 +3,32 @@ https://boj.kr/2178
 '''
 import sys
 from collections import deque
+input = sys.stdin.readline
+
+n,m = map(int,input().split())
+maze = []
+dr = [(0,-1), (0,1), (-1,0), (1,0)]
+
+for _ in range(n):
+    row = list(map(int,list(input().rstrip())))
+    maze.append(row)
+
+dist = [[-1 for _ in range(m)] for _ in range(n)]
+
+def bfs():
+    q = deque([(0,0)])
+    dist[0][0] = 1
+    while q:
+        cur_y,cur_x = q.popleft()
+        for dy,dx in dr:
+            ny = cur_y + dy
+            nx = cur_x + dx
+            if 0 <= ny < len(maze) and 0 <= nx < len(maze[0]) and maze[ny][nx] == 1 and dist[ny][nx] == -1:
+                dist[ny][nx] = dist[cur_y][cur_x] + 1
+                q.append((ny,nx))
+    return dist[n-1][m-1]
+print(bfs())
+'''
 N,M = map(int,sys.stdin.readline().split())
 maze = []
 dr = [(0,-1), (0,1), (-1,0), (1,0)]
@@ -37,6 +63,7 @@ for _ in range(N):
     maze.append(list(map(int,list(sys.stdin.readline().strip()))))
 
 print(bfs())
+'''
 
 '''
 import sys

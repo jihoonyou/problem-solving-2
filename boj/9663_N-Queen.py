@@ -15,16 +15,16 @@ def func(cur): # cur은 row - x좌표 (수학 기준)
     if cur == n:
         cnt += 1
         return
-    for i in range(1,n+1): # col - y좌표 (수학 기준)
+    for i in range(n): # col - y좌표 (수학 기준)
         if isColumnUsed[i] or isLRDiagnoalUsed[cur+i] or isRLDiagnoalUsed[cur - i + n - 1]:
             continue
-        isColumnUsed[i] = True
-        isLRDiagnoalUsed[cur+i] = True
-        isRLDiagnoalUsed[cur - i + n - 1] = True
+        isColumnUsed[i] = 1
+        isLRDiagnoalUsed[cur+i] = 1
+        isRLDiagnoalUsed[cur - i + n - 1] = 1
         func(cur+1)
-        isColumnUsed[i] = False
-        isLRDiagnoalUsed[cur+i] = False
-        isRLDiagnoalUsed[cur - i + n - 1] = False
+        isColumnUsed[i] = 0
+        isLRDiagnoalUsed[cur+i] = 0
+        isRLDiagnoalUsed[cur - i + n - 1] = 0
 
 func(0)
 print(cnt)
